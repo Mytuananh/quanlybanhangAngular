@@ -66,7 +66,7 @@ public class ProductController {
                 productService.save(product1.get());
                 return new ResponseEntity<>(new ResponeMessage("yes"), HttpStatus.OK);
             }
-            return new ResponseEntity<>(new ResponeMessage("no_name_category"), HttpStatus.OK);
+            return new ResponseEntity<>(new ResponeMessage("no_name_product"), HttpStatus.OK);
         }
         product1.get().setName(product.getName());
         product1.get().setDateOfManufacture(product.getDateOfManufacture());
