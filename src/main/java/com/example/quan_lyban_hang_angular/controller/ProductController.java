@@ -75,6 +75,7 @@ public class ProductController {
         product1.get().setDateOfManufacture(product.getDateOfManufacture());
         product1.get().setAvatarProduct(product.getAvatarProduct());
         product1.get().setDescription(product.getDescription());
+        productService.save(product1.get());
         return new ResponseEntity<>(new ResponeMessage("yes"), HttpStatus.OK);
     }
 }
