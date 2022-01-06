@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin(origins = "*")
 @RequestMapping("/products")
 @RestController
@@ -32,5 +34,13 @@ public class ProductController {
         }
         productService.save(product);
         return new ResponseEntity<>(new ResponeMessage("yes"), HttpStatus.OK);
+    }
+    @GetMapping("/list")
+    public ResponseEntity<?> showListProduct() {
+        List<Product> productList = productService.findAll();
+        if (productList.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(productList, HttpStatus.OK);
     }
 }
