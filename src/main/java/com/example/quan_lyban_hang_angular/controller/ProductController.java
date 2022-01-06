@@ -53,20 +53,17 @@ public class ProductController {
         if (productService.existsByName(product.getName())) {
             if (!product.getAvatarProduct().equals(product1.get().getAvatarProduct())) {
                 product1.get().setAvatarProduct(product.getAvatarProduct());
+                productService.save(product1.get());
                 return new ResponseEntity<>(new ResponeMessage("yes"), HttpStatus.OK);
             }
-            return new ResponseEntity<>(new ResponeMessage("no_name_category"), HttpStatus.OK);
-        }
-        if (productService.existsByName(product.getName())) {
             if (!product.getDateOfManufacture().equals(product1.get().getDateOfManufacture())) {
                 product1.get().setDateOfManufacture(product.getDateOfManufacture());
                 return new ResponseEntity<>(new ResponeMessage("yes"), HttpStatus.OK);
+                productService.save(product1.get());
             }
-            return new ResponseEntity<>(new ResponeMessage("no_name_category"), HttpStatus.OK);
-        }
-        if (productService.existsByName(product.getName())) {
             if (!product.getDescription().equals(product1.get().getDescription())) {
                 product1.get().setDescription(product.getDescription());
+                productService.save(product1.get());
                 return new ResponseEntity<>(new ResponeMessage("yes"), HttpStatus.OK);
             }
             return new ResponseEntity<>(new ResponeMessage("no_name_category"), HttpStatus.OK);
