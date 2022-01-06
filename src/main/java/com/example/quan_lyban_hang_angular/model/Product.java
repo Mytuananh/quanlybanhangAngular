@@ -18,7 +18,6 @@ public class Product {
     @NotBlank
     @Size(min = 3, max = 50)
     private String name;
-    @NotBlank
     private LocalDate dateOfManufacture;
     private String avatarProduct;
     @Size(max = 100)
@@ -36,6 +35,21 @@ public class Product {
         this.avatarProduct = avatarProduct;
         this.description = description;
         this.user = user;
+    }
+
+    public Product(String name, LocalDate dateOfManufacture, String avatarProduct, String description, User user) {
+        this.name = name;
+        this.dateOfManufacture = dateOfManufacture;
+        this.avatarProduct = avatarProduct;
+        this.description = description;
+        this.user = user;
+    }
+
+    public Product(String name, LocalDate dateOfManufacture, String avatarProduct, String description) {
+        this.name = name;
+        this.dateOfManufacture = dateOfManufacture;
+        this.avatarProduct = avatarProduct;
+        this.description = description;
     }
 
     public Long getId() {
