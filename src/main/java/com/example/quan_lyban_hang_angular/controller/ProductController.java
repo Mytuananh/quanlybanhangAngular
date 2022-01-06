@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "*")
 @RequestMapping("/products")
@@ -42,5 +43,38 @@ public class ProductController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(productList, HttpStatus.OK);
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateProduct(@PathVariable Long id, @RequestBody Product product) {
+        Optional<Product> product1 = productService.findById(id);
+        if (!product1.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        if (productService.existsByName(product.getName())) {
+            if (!product.getAvatarProduct().equals(product1.get().getAvatarProduct())) {
+                product1.get().setAvatarProduct(product.getAvatarProduct());
+                return new ResponseEntity<>(new ResponeMessage("yes"), HttpStatus.OK);
+            }
+            return new ResponseEntity<>(new ResponeMessage("no_name_category"), HttpStatus.OK);
+        }
+        if (productService.existsByName(product.getName())) {
+            if (!product.getDateOfManufacture().equals(product1.get().getDateOfManufacture())) {
+                product1.get().setDateOfManufacture(product.getDateOfManufacture());
+                return new ResponseEntity<>(new ResponeMessage("yes"), HttpStatus.OK);
+            }
+            return new ResponseEntity<>(new ResponeMessage("no_name_category"), HttpStatus.OK);
+        }
+        if (productService.existsByName(product.getName())) {
+            if (!product.getDescription().equals(product1.get().getDescription())) {
+                product1.get().setDescription(product.getDescription());
+                return new ResponseEntity<>(new ResponeMessage("yes"), HttpStatus.OK);
+            }
+            return new ResponseEntity<>(new ResponeMessage("no_name_category"), HttpStatus.OK);
+        }
+        product1.get().setName(product.getName());
+        product1.get().setDateOfManufacture(product.getDateOfManufacture());
+        product1.get().setAvatarProduct(product.getAvatarProduct());
+        product1.get().setDescription(product.getDescription());
+        return new ResponseEntity<>(new ResponeMessage("yes"), HttpStatus.OK);
     }
 }
