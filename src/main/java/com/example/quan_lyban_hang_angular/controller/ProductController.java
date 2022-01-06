@@ -75,4 +75,12 @@ public class ProductController {
         productService.save(product1.get());
         return new ResponseEntity<>(new ResponeMessage("yes"), HttpStatus.OK);
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<?> detailsProduct(@PathVariable Long id) {
+        Optional<Product> product = productService.findById(id);
+        if (!product.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(product, HttpStatus.OK);
+    }
 }
