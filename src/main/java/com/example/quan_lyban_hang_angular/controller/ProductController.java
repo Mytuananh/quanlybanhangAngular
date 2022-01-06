@@ -58,8 +58,8 @@ public class ProductController {
             }
             if (!product.getDateOfManufacture().equals(product1.get().getDateOfManufacture())) {
                 product1.get().setDateOfManufacture(product.getDateOfManufacture());
-                return new ResponseEntity<>(new ResponeMessage("yes"), HttpStatus.OK);
                 productService.save(product1.get());
+                return new ResponseEntity<>(new ResponeMessage("yes"), HttpStatus.OK);
             }
             if (!product.getDescription().equals(product1.get().getDescription())) {
                 product1.get().setDescription(product.getDescription());
